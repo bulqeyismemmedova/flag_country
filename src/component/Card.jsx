@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function Card({ flag, region, name, capital, population, area }) {
+function Card({ flag, region, name, capital, population, area, alpha3Code  }) {
   return (
     <article className="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-300">
       <a rel="noopener noreferrer" href="#" aria-label={`${name} flag`}>
@@ -18,9 +19,9 @@ function Card({ flag, region, name, capital, population, area }) {
         >
           {region}
         </a>
-        <h3 className="flex-1 py-2 text-lg font-semibold leading-snug text-gray-900 dark:text-white">
+        <Link to={`/details/${alpha3Code}`} className="flex-1 py-2 text-lg font-semibold leading-snug text-gray-900 dark:text-white">
           {name}, {capital}
-        </h3>
+        </Link>
         <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-gray-600 dark:text-gray-300">
           <span>Population: {population}</span>
           <span>Area: {area} km²</span>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const RandomCard = ({ ctnData }) => {
   const [country, setCountry] = useState({})
+
 
   useEffect(() => {
     if (ctnData.length) {
@@ -20,17 +22,20 @@ const RandomCard = ({ ctnData }) => {
         alt={`${country?.name} flag`}
         className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-700"
       />
-      <div className="p-6 space-y-2 lg:col-span-5 text-gray-800 dark:text-gray-100">
-        <a
-          href="#"
-          className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline"
+      <div className="p-8 space-y-5 space-x-5 lg:col-span-5 text-gray-800 dark:text-gray-100">
+        <Link
+          to={`/details/${country.alpha3Code}`}
+          className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline mr-10"
         >
           {country?.name}
-        </a>
-        <span className="text-sm text-gray-500 dark:text-gray-400">{country?.region}</span>
-        <p>Capital: {country?.capital}</p>
-        <p>Area: {country?.area} km²</p>
-        <p>Population: {country?.population}</p>
+        </Link>
+
+        <div className='flex flex-col gap-3 pt-3'>
+          <p className="text-md text-gray-500 dark:text-gray-400">Region:{country?.region}</p>
+          <p>Capital: {country?.capital}</p>
+          <p>Area: {country?.area} km²</p>
+          <p>Population: {country?.population}</p>
+        </div>
       </div>
     </div>
   )

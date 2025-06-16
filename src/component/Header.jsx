@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaEarthAmericas } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 function Header({ setRegion, ctnData }) {
   const regArr = [...new Set(ctnData.map(item => item.region))];
@@ -27,9 +28,9 @@ function Header({ setRegion, ctnData }) {
           <ul className='flex flex-col gap-5 mx-5'>
             {regArr.map((region, id) => (
               <li className='flex' onClick={() => setRegion(region)} key={id}>
-                <a href="#" className="hover:underline font-semibold text-[20px] dark:text-white">
+                <Link to={`/countries/${region}`} className="hover:underline font-semibold text-[20px] dark:text-white">
                   {region}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -42,24 +43,24 @@ function Header({ setRegion, ctnData }) {
           <ul className="flex md:flex-row flex-wrap items-center gap-6">
             {firstHalf.map((region, id) => (
               <li className='hidden md:flex' onClick={() => setRegion(region)} key={id}>
-                <a href="#" className="hover:underline dark:text-white">
+                <Link to={`/countries/${region}`} className="hover:underline dark:text-white">
                   {region}
-                </a>
+                </Link>
               </li>
             ))}
 
             {/* Logo */}
             <li onClick={() => setRegion(null)}>
-              <a href="#" aria-label="Back to homepage" className="p-2 dark:text-white">
+              <Link to={"/countries"} aria-label="Back to homepage" className="p-2 dark:text-white">
                 <FaEarthAmericas size={30} />
-              </a>
+              </Link>
             </li>
 
             {secondHalf.map((region, id) => (
               <li key={id} className='hidden md:flex' onClick={() => setRegion(region)}>
-                <a href="#" className="hover:underline dark:text-white">
+                <Link to={`/countries/${region}`} className="hover:underline dark:text-white">
                   {region}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

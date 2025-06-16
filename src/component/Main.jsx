@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Card from './Card'
 import RandomCard from './RandomCard'
+import { useParams } from 'react-router-dom'
 
-function Main({ region, ctnData }) {
+function Main({ ctnData }) {
   const [value, setValue] = useState('')
   const [status, setStatus] = useState(false)
+  const { region } = useParams()
 
   function handleInput() {
     setStatus(!status)

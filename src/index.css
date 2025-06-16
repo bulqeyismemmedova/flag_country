@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+
+.shdow{
+    box-shadow: 0 0 10px rgb(82, 78, 78);
+}
