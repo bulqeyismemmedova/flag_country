@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaEarthAmericas } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
@@ -12,10 +12,22 @@ function Header({ setRegion, ctnData }) {
   const [burger, setBurger] = useState(false)
   const [isDark, setIsDark] = useState(false)
 
-  function handleThema() {
-    setIsDark(!isDark)
+  function handleThema(){
+    const newMode = !isDark
+    setIsDark(newMode)
+    localStorage.setItem("mode", newMode ? 'dark' : 'light')
     document.documentElement.classList.toggle("dark")
   }
+  useEffect(()=>{
+    const mode = localStorage.getItem("mode")
+    if (mode == 'dark') {
+      document.documentElement.classList.add("dark")
+      setIsDark(true)
+    }else{
+      document.documentElement.classList.remove("dark")
+      setIsDark(false)
+    }
+  },[])
 
   return (
     <header className="p-4 bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
