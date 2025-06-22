@@ -6,3 +6,7 @@
 .shdow{
     box-shadow: 0 0 10px rgb(82, 78, 78);
 }
+
+.active{
+    color: blueviolet;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Card({ flag, region, name, capital, population, area, alpha3Code  }) {
   return (
@@ -19,9 +19,9 @@ function Card({ flag, region, name, capital, population, area, alpha3Code  }) {
         >
           {region}
         </a>
-        <Link to={`/details/${alpha3Code}`} className="flex-1 py-2 text-lg font-semibold leading-snug text-gray-900 dark:text-white">
+        <NavLink to={`/details/${alpha3Code}`} className="flex-1 py-2 text-lg font-semibold leading-snug text-gray-900 dark:text-white">
           {name}, {capital}
-        </Link>
+        </NavLink>
         <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-gray-600 dark:text-gray-300">
           <span>Population: {population}</span>
           <span>Area: {area} km²</span>

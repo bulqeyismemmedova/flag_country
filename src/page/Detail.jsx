@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import Error from './Error';
+import { CountryData } from '../context/DataContext';
 
-function Detail({ ctnData }) {
+function Detail() {
 
+    const {ctnData} = useContext(CountryData)
     const { ad } = useParams()
     const cntObj = ctnData.find(item => item.alpha3Code == ad)
     console.log(cntObj);

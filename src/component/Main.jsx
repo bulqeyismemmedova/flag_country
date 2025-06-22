@@ -1,17 +1,40 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Card from './Card'
 import RandomCard from './RandomCard'
 import { useParams } from 'react-router-dom'
+import Error from '../page/Error'
+import { CountryData } from '../context/DataContext'
+import Loading from '../page/Loading'
 
-function Main({ ctnData }) {
+function Main() {
   const [value, setValue] = useState('')
   const [status, setStatus] = useState(false)
   const { region } = useParams()
 
+    const {ctnData, error, loader} = useContext(CountryData)
+
+  useEffect(()=>{
+    if(status){
+      inpRef.current.focus()
+    }
+  },[status])
+
   function handleInput() {
     setStatus(!status)
-  }
+}
+  const regArr = [...new Set(ctnData.map(item => item.region))];
 
+  const isHave = regArr.some(item=> item == region)
+  
+  // if(loader){
+  //   return <Loading/>
+  // }
+  
+
+  if(!isHave && region || error ){
+    return <Error />
+  }
+  const inpRef = useRef(null)
   return (
     <>
       {
@@ -28,6 +51,7 @@ function Main({ ctnData }) {
             </div>
             <div>
               <input
+                ref={inpRef}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder='Olke axtar'
                 className={`border p-3 rounded-2xl ${status ? 'block' : 'hidden'} dark:bg-gray-800 dark:border-gray-600 dark:text-white`}
@@ -38,7 +62,7 @@ function Main({ ctnData }) {
               <button className="py-[15px] rounded-[5px] border-0 font-bold text-white bg-violet-500 uppercase text-[.9rem] hover:bg-[#6f4cd6] md:w-[170px] px-3">
                 HAVE A LOOK
               </button>
-              <button onClick={handleInput} className="py-[15px] rounded-[5px] border-0 font-bold text-white bg-[#000] uppercase text-[.9rem] hover:bg-[#191919] md:w-[170px] px-3">
+              <button  onClick={handleInput} className="py-[15px] rounded-[5px] border-0 font-bold text-white bg-[#000] uppercase text-[.9rem] hover:bg-[#191919] md:w-[170px] px-3">
                 SEARCH
               </button>
             </div>
@@ -50,7 +74,7 @@ function Main({ ctnData }) {
         !region && !status && (
           <section className="py-6 sm:py-12 text-gray-800 dark:text-gray-100 dark:bg-gray-900">
             <div className="container p-6 mx-auto space-y-8">
-              <RandomCard region={region} ctnData={ctnData} />
+              <RandomCard region={region}/>
             </div>
           </section>
         )

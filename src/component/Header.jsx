@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaEarthAmericas } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { CountryData } from '../context/DataContext';
 
-function Header({ setRegion, ctnData }) {
+function Header({ setRegion }) {
+
+const {ctnData} = useContext(CountryData)
+
   const regArr = [...new Set(ctnData.map(item => item.region))];
   const firstHalf = regArr.slice(0, 4);
   const secondHalf = regArr.slice(4, 8);
@@ -29,6 +33,8 @@ function Header({ setRegion, ctnData }) {
     }
   },[])
 
+  
+
   return (
     <header className="p-4 bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
       {/* Sidebar */}
@@ -40,9 +46,9 @@ function Header({ setRegion, ctnData }) {
           <ul className='flex flex-col gap-5 mx-5'>
             {regArr.map((region, id) => (
               <li className='flex' onClick={() => setRegion(region)} key={id}>
-                <Link to={`/countries/${region}`} className="hover:underline font-semibold text-[20px] dark:text-white">
+                <NavLink to={`/countries/${region}`} className="hover:underline font-semibold text-[20px] dark:text-white">
                   {region}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -55,24 +61,24 @@ function Header({ setRegion, ctnData }) {
           <ul className="flex md:flex-row flex-wrap items-center gap-6">
             {firstHalf.map((region, id) => (
               <li className='hidden md:flex' onClick={() => setRegion(region)} key={id}>
-                <Link to={`/countries/${region}`} className="hover:underline dark:text-white">
+                <NavLink to={`/countries/${region}`} className="hover:underline dark:text-white">
                   {region}
-                </Link>
+                </NavLink>
               </li>
             ))}
 
             {/* Logo */}
             <li onClick={() => setRegion(null)}>
-              <Link to={"/countries"} aria-label="Back to homepage" className="p-2 dark:text-white">
+              <NavLink to={"/countries"} aria-label="Back to homepage" className="p-2 dark:text-white">
                 <FaEarthAmericas size={30} />
-              </Link>
+              </NavLink>
             </li>
 
             {secondHalf.map((region, id) => (
               <li key={id} className='hidden md:flex' onClick={() => setRegion(region)}>
-                <Link to={`/countries/${region}`} className="hover:underline dark:text-white">
+                <NavLink to={`/countries/${region}`} className="hover:underline dark:text-white">
                   {region}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

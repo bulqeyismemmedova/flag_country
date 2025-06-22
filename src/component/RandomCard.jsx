@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { CountryData } from '../context/DataContext';
 
-const RandomCard = ({ ctnData }) => {
+const RandomCard = () => {
   const [country, setCountry] = useState({})
-
+  const {ctnData} = useContext(CountryData)
 
   useEffect(() => {
     if (ctnData.length) {
@@ -23,12 +25,12 @@ const RandomCard = ({ ctnData }) => {
         className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-700"
       />
       <div className="p-8 space-y-5 space-x-5 lg:col-span-5 text-gray-800 dark:text-gray-100">
-        <Link
+        <NavLink
           to={`/details/${country.alpha3Code}`}
           className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline mr-10"
         >
           {country?.name}
-        </Link>
+        </NavLink>
 
         <div className='flex flex-col gap-3 pt-3'>
           <p className="text-md text-gray-500 dark:text-gray-400">Region:{country?.region}</p>
