@@ -26,15 +26,18 @@ function Main() {
 
   const isHave = regArr.some(item=> item == region)
   
-  // if(loader){
-  //   return <Loading/>
-  // }
+  
   
 
   if(!isHave && region || error ){
     return <Error />
   }
   const inpRef = useRef(null)
+
+  
+  if(loader){
+    return <Loading/>
+  }
   return (
     <>
       {

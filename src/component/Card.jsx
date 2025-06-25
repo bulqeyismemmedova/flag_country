@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function Card({ flag, region, name, capital, population, area, alpha3Code  }) {
+function Card({ flag, region, name, capital, population, area, alpha3Code }) {
   return (
     <article className="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-300">
       <a rel="noopener noreferrer" href="#" aria-label={`${name} flag`}>
